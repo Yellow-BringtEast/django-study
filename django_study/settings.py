@@ -9,12 +9,23 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from configparser import ConfigParser
+
+# mysql数据库配置
+CFG_DIR = os.path.dirname(os.path.abspath(__file__))
+config = ConfigParser()
+config.read(os.path.join(CFG_DIR, 'config.cfg'), encoding='utf-8')
+
+host = config.get('DB_Config', 'host')
+port = config.getint('DB_Config', 'port')
+username = config.get('DB_Config', 'user')
+password = config.get('DB_Config', 'password')
+database = config.get('DB_Config', 'database')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -26,7 +37,6 @@ SECRET_KEY = 'django-insecure-@3sh23sj$#q81le3s3%ozsr3$cr!zc%apzh=dt8+#3kt%_9m7n
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -70,17 +80,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_study.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': database,
+        'USER': username,
+        'PASSWORD': password,
+        'HOST': host,
+        'PORT': port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -100,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -111,7 +129,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

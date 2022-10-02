@@ -25,4 +25,6 @@ urlpatterns = [
     path('something/', views.something),
     # 案例：用户登录
     path('login/', views.login),
+    # orm
+    path('orm/', views.orm),
 ]

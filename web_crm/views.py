@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-import requests
+from .models import Department
 
 
 # Create your views here.
@@ -56,3 +56,12 @@ def login(request):
 
     # 校验失败返回登录页面并提示错误信息
     return render(request, 'login.html', {'error_message': '用户名或密码错误'})
+
+
+def orm(request):
+    # 测试ORM操作表中的数据
+    Department.objects.create(title='销售部')
+    Department.objects.create(title='IT')
+    Department.objects.create(title='运营部')
+
+    return HttpResponse('成功')
