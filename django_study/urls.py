@@ -20,5 +20,6 @@ from web_crm import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('index/', views.index),
-    path('users/list/', views.user_list)
+    path('users/list/', views.user_list),
+    path('tpl/', views.tpl),
 ]
