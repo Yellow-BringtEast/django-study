@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from web_crm import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('index/', views.index),
+    path('users/list/', views.user_list),
+    path('tpl/', views.tpl),
+    path('something/', views.something),
+    # 案例：用户登录
+    path('login/', views.login),
+    # orm
+    path('orm/', views.orm),
 ]
