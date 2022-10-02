@@ -22,4 +22,7 @@ urlpatterns = [
     path('index/', views.index),
     path('users/list/', views.user_list),
     path('tpl/', views.tpl),
+    path('something/', views.something),
+    # 案例：用户登录
+    path('login/', views.login),
 ]
