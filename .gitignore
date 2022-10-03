@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# pycharm配置文件
+.idea
+
+# 数据库配置文件
+*.cfg
